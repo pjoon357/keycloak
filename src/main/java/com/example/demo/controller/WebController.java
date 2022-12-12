@@ -4,13 +4,13 @@ import com.example.demo.dao.CustomerDAO;
 import com.example.demo.entity.Customer;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class WebController {
 
@@ -29,6 +29,8 @@ public class WebController {
 
     @GetMapping(path = "/customers")
     public String customers(Principal principal, Model model) {
+
+        System.out.println("principal.getName() = " + principal);
         addCustomers();
         Iterable<Customer> customers = customerDAO.findAll();
         model.addAttribute("customers", customers);
